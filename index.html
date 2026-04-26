@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph Neural Networks for Data Mining — Academic Survey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f7f7f5;
+      --text: #1a1a18;
+      --text-secondary: #4a4a46;
+      --text-tertiary: #888880;
+      --border: #d8d8d2;
+      --border-light: #eaeae4;
+      --accent: #1a3a5c;
+      --accent-light: #e8eef5;
+      --accent-text: #0c2a44;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Lora', Georgia, serif;
+      --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Layout */
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* Top bar */
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .topbar-left {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .topbar-right {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+    }
+
+    /* Header */
+    .article-header {
+      padding: 2.5rem 0 2rem;
+      border-bottom: 2px solid var(--text);
+      margin-bottom: 2.5rem;
+    }
+
+    .article-type {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-text);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 3px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .article-meta {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: 0.5rem;
+      font-family: var(--sans);
+      font-weight: 300;
+    }
+
+    .article-meta strong {
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* Abstract */
+    .abstract {
+      background: var(--bg-secondary);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 1.75rem;
+      margin: 2rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .abstract-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+    }
+
+    .abstract p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin: 0;
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 1rem;
+    }
+
+    .keyword {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 3px 9px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-secondary);
+      background: var(--bg);
+    }
+
+    /* TOC */
+    .toc {
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 1.5rem 1.75rem;
+      margin: 2.5rem 0;
+      background: var(--bg-secondary);
+    }
+
+    .toc-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.85rem;
+    }
+
+    .toc ol {
+      padding-left: 1.25rem;
+      margin: 0;
+    }
+
+    .toc li {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    .toc a {
+      color: var(--accent-text);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 2rem;
+    }
+
+    .section-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: 5px;
+      display: block;
+      letter-spacing: 0.06em;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1.1rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin: 1.75rem 0 0.6rem;
+      letter-spacing: 0.01em;
+    }
+
+    p {
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Definition box */
+    .def-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.1rem 1.4rem;
+      margin: 1.5rem 0;
+      background: var(--bg);
+    }
+
+    .def-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.6rem;
+    }
+
+    .def-box p {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin: 0;
+      font-weight: 300;
+    }
+
+    /* Equation box */
+    .eq-box {
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      padding: 1.25rem 1.75rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .eq-box code {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--text);
+      display: block;
+      line-height: 2;
+    }
+
+    .eq-caption {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* Tables */
+    .fig-wrap {
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      table-layout: fixed;
+    }
+
+    thead th {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      padding: 8px 12px;
+      border-bottom: 1.5px solid var(--border);
+      text-align: left;
+      background: var(--bg-secondary);
+    }
+
+    tbody td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text);
+      font-weight: 300;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: var(--bg-secondary);
+    }
+
+    .fig-caption {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 6px;
+      font-style: italic;
+      font-family: var(--sans);
+    }
+
+    /* Step flow */
+    .step-flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+
+    .step-box {
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 1rem 1.1rem;
+      background: var(--bg);
+    }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      margin-bottom: 5px;
+      letter-spacing: 0.06em;
+    }
+
+    .step-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .step-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* Architecture grid */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+
+    .arch-box {
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 1rem 1.1rem;
+      background: var(--bg);
+    }
+
+    .arch-name {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .arch-year {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: 7px;
+    }
+
+    .arch-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    /* Task grid */
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+
+    .task-box {
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 1rem 1.1rem;
+      background: var(--bg);
+    }
+
+    .task-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .task-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      font-weight: 300;
+      margin-bottom: 6px;
+    }
+
+    .task-eg {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+    }
+
+    /* Industry grid */
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+
+    .ind-box {
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 1rem 1.1rem;
+      background: var(--bg);
+    }
+
+    .ind-sector {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .ind-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+
+    .metric-card {
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      display: block;
+    }
+
+    .metric-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      display: block;
+      margin-top: 4px;
+      letter-spacing: 0.06em;
+    }
+
+    /* Challenge table */
+    .challenge-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    .challenge-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 13px;
+      vertical-align: top;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .challenge-table td:first-child {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      width: 150px;
+      white-space: nowrap;
+      padding-top: 12px;
+    }
+
+    .challenge-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Divider */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-light);
+      margin: 3rem 0;
+    }
+
+    /* References */
+    .ref-section {
+      border-top: 2px solid var(--border);
+      padding-top: 2rem;
+      margin-top: 3rem;
+    }
+
+    .ref-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1.25rem;
+    }
+
+    .ref-item {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+      padding-left: 2.5rem;
+      text-indent: -2.5rem;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    .ref-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-right: 10px;
+    }
+
+    /* Footer */
+    .page-footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    /* Print styles */
+    @media print {
+      .topbar {
+        display: none;
+      }
+
+      .toc {
+        display: none;
+      }
+
+      body {
+        font-size: 12pt;
+      }
+
+      h1 {
+        font-size: 20pt;
+      }
+
+      h2 {
+        font-size: 15pt;
+      }
+
+      .page-wrap {
+        max-width: 100%;
+        padding: 0 1cm;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-wrap {
+        padding: 0 1rem 4rem;
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .step-flow {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page-wrap">
+
+    <div class="topbar">
+      <div class="topbar-left"> &nbsp;·&nbsp; Data Warehousing And Mining &nbsp;·&nbsp; 2026</div>
+      <div class="topbar-right">CSE Department</div>
+    </div>
+
+    <!-- Header -->
+    <div class="article-header">
+      <h1>Graph Neural Networks for Data Mining: Architectures, Applications, and Open Challenges</h1>
+      <p class="article-meta"><strong>Affiliation:</strong> Department of Computer Science &amp; Engineering</p>
+      <p class="article-meta"><strong>Context:</strong> Written as a part of the Data Warehousing And Mining coursework,
+        2026</p>
+      <p class="article-meta"><strong>Name:</strong> M.Eswar Sainadh Reddy </p>
+      <p class="article-meta"><strong>Topics:</strong> Deep Learning · Graph Neural Networks · Data Mining · Node
+        Classification · Fraud Detection</p>
+    </div>
+
+    <!-- Abstract -->
+    <div class="abstract">
+      <div class="abstract-label">Abstract</div>
+      <p>Graph Neural Networks (GNNs) represent a significant advancement in the field of deep learning by extending
+        neural computation to graph-structured data. This article surveys the theoretical foundations of GNNs, examines
+        the major architectural variants — including Graph Convolutional Networks (GCN), Graph Attention Networks (GAT),
+        GraphSAGE, and Graph Isomorphism Networks (GIN) — and systematically maps these models to classical data mining
+        tasks such as node classification, link prediction, anomaly detection, clustering, and recommendation. An
+        end-to-end case study on fraud detection in financial transaction networks is presented to demonstrate empirical
+        effectiveness. Finally, open research challenges including scalability, over-smoothing, dynamic graph modeling,
+        and explainability are discussed.</p>
+      <div class="keywords">
+        <span class="keyword">graph neural networks</span>
+        <span class="keyword">message passing</span>
+        <span class="keyword">node classification</span>
+        <span class="keyword">link prediction</span>
+        <span class="keyword">fraud detection</span>
+        <span class="keyword">GCN</span>
+        <span class="keyword">GraphSAGE</span>
+        <span class="keyword">data mining</span>
+        <span class="keyword">deep learning</span>
+      </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <ol>
+        <li><a href="#sec1">Introduction to Data Mining</a></li>
+        <li><a href="#sec2">Neural Networks: Foundational Concepts</a></li>
+        <li><a href="#sec3">Graph Neural Networks: Definition and Motivation</a></li>
+        <li><a href="#sec4">The Message Passing Neural Network Framework</a></li>
+        <li><a href="#sec5">Major GNN Architectures</a></li>
+        <li><a href="#sec6">GNNs for Data Mining Tasks</a></li>
+        <li><a href="#sec7">Industry Deployments</a></li>
+        <li><a href="#sec8">Open Problems and Research Frontiers</a></li>
+        <li><a href="#sec9">Conclusion</a></li>
+      </ol>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section" id="sec1">
+      <span class="section-number">Section 1</span>
+      <h2>Introduction to data mining</h2>
+      <p>Data mining refers to the computational process of discovering patterns, anomalies, correlations, and
+        actionable insights from large-scale datasets through the application of statistical, mathematical, and machine
+        learning methods. As datasets have grown in volume and complexity — spanning healthcare, finance, social media,
+        and scientific research — automated knowledge extraction has become indispensable.</p>
+
+      <div class="def-box">
+        <div class="def-label">Definition 1.1 — Data Mining</div>
+        <p>"Data Mining is the process of discovering patterns, anomalies, correlations, and insights from large
+          datasets using statistical, mathematical, and computational methods."</p>
+      </div>
+
+      <p>The core tasks of data mining can be broadly categorized as follows:</p>
+
+      <div class="fig-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:22%">Task</th>
+              <th style="width:40%">Description</th>
+              <th style="width:38%">Representative techniques</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Classification &amp; Regression</td>
+              <td>Assign labels or predict continuous values for data instances</td>
+              <td>Decision Trees, SVMs, Neural Networks</td>
+            </tr>
+            <tr>
+              <td>Clustering</td>
+              <td>Group similar instances without predefined labels</td>
+              <td>K-Means, DBSCAN, Hierarchical Clustering</td>
+            </tr>
+            <tr>
+              <td>Association Rule Mining</td>
+              <td>Discover co-occurrence relationships among variables</td>
+              <td>Apriori, FP-Growth</td>
+            </tr>
+            <tr>
+              <td>Anomaly Detection</td>
+              <td>Identify rare instances that deviate from the norm</td>
+              <td>Isolation Forest, Autoencoders</td>
+            </tr>
+            <tr>
+              <td>Dimensionality Reduction</td>
+              <td>Reduce feature space while preserving structure</td>
+              <td>PCA, t-SNE, UMAP</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="fig-caption">Table 1. Core data mining tasks and representative techniques.</p>
+      </div>
+
+      <p>Applications span domains including healthcare diagnostics, financial risk assessment, e-commerce
+        personalization, cybersecurity threat detection, and social network analysis. The emergence of relational and
+        graph-structured data in these domains motivates the adoption of GNNs as a powerful data mining tool.</p>
+    </div>
+
+    <hr>
+
+    <!-- Section 2 -->
+    <div class="section" id="sec2">
+      <span class="section-number">Section 2</span>
+      <h2>Neural networks: foundational concepts</h2>
+      <p>A neural network is a computational model consisting of layered interconnected nodes (neurons) that approximate
+        complex functions through supervised training. Formally, given an input vector <em>x ∈ ℝᵈ</em>, a feedforward
+        neural network computes a prediction <em>ŷ</em> by composing a sequence of affine transformations and non-linear
+        activations across <em>L</em> layers.</p>
+
+      <div class="def-box">
+        <div class="def-label">Definition 2.1 — Feedforward Neural Network</div>
+        <p>A Neural Network is a computational model composed of layers of nodes (neurons) that learn to map inputs to
+          outputs by adjusting weights through training via gradient descent on a differentiable loss function.</p>
+      </div>
+
+      <p>The three primary layer types in a standard feedforward architecture are: (i) the <strong>input layer</strong>,
+        which receives raw feature representations; (ii) one or more <strong>hidden layers</strong>, which learn
+        abstract intermediate representations through non-linear transformations; and (iii) the <strong>output
+          layer</strong>, which produces class probabilities or regression values.</p>
+
+      <p>While CNNs are specialized for grid-structured data (images) and RNNs for sequential data (text, time series),
+        neither architecture is suited to handle data organized as irregular graphs — the domain in which GNNs operate.
+      </p>
+    </div>
+
+    <hr>
+
+    <!-- Section 3 -->
+    <div class="section" id="sec3">
+      <span class="section-number">Section 3</span>
+      <h2>Graph Neural Networks: definition and motivation</h2>
+      <p>A graph <em>G = (V, E)</em> consists of a set of nodes <em>V</em> representing entities and a set of edges
+        <em>E</em> representing relationships between them. Each node <em>v ∈ V</em> is associated with a feature vector
+        <em>xᵥ ∈ ℝᶠ</em>, and edges may optionally carry attributes. Real-world data is inherently relational — social
+        connections, molecular bonds, citation links, and financial transactions all exhibit graph structure that
+        tabular representations fail to capture.
+      </p>
+
+      <div class="def-box">
+        <div class="def-label">Definition 3.1 — Graph Neural Network</div>
+        <p>A Graph Neural Network (GNN) is a class of deep learning model designed to operate on graph data — learning
+          node, edge, and graph-level representations through iterative message passing between neighboring nodes across
+          multiple aggregation layers.</p>
+      </div>
+
+      <div class="fig-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:20%">Architecture</th>
+              <th style="width:30%">Input data type</th>
+              <th style="width:50%">Structural inductive bias</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CNN</td>
+              <td>Grid data (images)</td>
+              <td>Spatial locality, translational equivariance</td>
+            </tr>
+            <tr>
+              <td>RNN / LSTM</td>
+              <td>Sequential data (text, audio)</td>
+              <td>Temporal order, recurrence</td>
+            </tr>
+            <tr>
+              <td>GNN</td>
+              <td>Graph data</td>
+              <td>Relational structure, neighborhood aggregation</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="fig-caption">Table 2. Comparison of deep learning architectures and their structural inductive biases.
+        </p>
+      </div>
+
+      <p>GNNs address the fundamental limitation of conventional neural networks by incorporating structural topology
+        into the learning process. A node's embedding is computed not solely from its own features, but from the
+        aggregated representations of its neighborhood — enabling the model to capture both feature-level and structural
+        information simultaneously.</p>
+    </div>
+
+    <hr>
+
+    <!-- Section 4 -->
+    <div class="section" id="sec4">
+      <span class="section-number">Section 4</span>
+      <h2>The message passing neural network framework</h2>
+      <p>The Message Passing Neural Network (MPNN) framework, introduced by Gilmer et al. (2017), provides a unified
+        abstraction for virtually all GNN variants. The computation proceeds in <em>L</em> discrete rounds, where each
+        round corresponds to one hop of neighborhood information aggregation.</p>
+
+      <div class="step-flow">
+        <div class="step-box">
+          <div class="step-num">Step 01</div>
+          <div class="step-title">Initialize</div>
+          <div class="step-desc">Each node v is assigned its input feature vector h⁰ᵥ = xᵥ</div>
+        </div>
+        <div class="step-box">
+          <div class="step-num">Step 02</div>
+          <div class="step-title">Aggregate</div>
+          <div class="step-desc">Collect messages from the neighborhood N(v) at layer l</div>
+        </div>
+        <div class="step-box">
+          <div class="step-num">Step 03</div>
+          <div class="step-title">Update</div>
+          <div class="step-desc">Combine aggregated messages with the node's own state via a neural network</div>
+        </div>
+        <div class="step-box">
+          <div class="step-num">Step 04</div>
+          <div class="step-title">Readout</div>
+          <div class="step-desc">Pool node embeddings to form a graph-level representation for graph tasks</div>
+        </div>
+      </div>
+
+      <p>Formally, the update rule at layer <em>l</em> for node <em>v</em> is expressed as:</p>
+
+      <div class="eq-box">
+        <code>m⁽ˡ⁾ᵥ = AGG({ h⁽ˡ⁾ᵤ : u ∈ N(v) })</code>
+        <code>h⁽ˡ⁺¹⁾ᵥ = UPDATE( h⁽ˡ⁾ᵥ , m⁽ˡ⁾ᵥ )</code>
+        <code>ŷ = READOUT({ h⁽ᴸ⁾ᵥ : v ∈ G })</code>
+        <span class="eq-caption">Equation 1. MPNN update equations (Gilmer et al., 2017)</span>
+      </div>
+
+      <p>The functions AGG (aggregation), UPDATE, and READOUT are parameterized by learnable neural networks and vary
+        across GNN architectures. The number of layers <em>L</em> determines the receptive field: an <em>L</em>-layer
+        GNN incorporates information from <em>L</em>-hop neighborhoods. The choice of aggregation function is critical —
+        it must be permutation-invariant with respect to the ordering of neighbors, as graphs have no canonical node
+        ordering.</p>
+    </div>
+
+    <hr>
+
+    <!-- Section 5 -->
+    <div class="section" id="sec5">
+      <span class="section-number">Section 5</span>
+      <h2>Major GNN architectures</h2>
+      <p>The following architectures represent the most influential contributions to the GNN literature, each
+        introducing distinct aggregation strategies with different theoretical and empirical properties.</p>
+
+      <div class="arch-grid">
+        <div class="arch-box">
+          <div class="arch-name">GCN</div>
+          <div class="arch-year">Kipf &amp; Welling, 2017</div>
+          <div class="arch-desc">Spectral-domain convolution approximated as a symmetric normalized mean aggregation
+            over immediate neighbors. Foundational architecture; simple and effective for semi-supervised node
+            classification.</div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-name">GAT</div>
+          <div class="arch-year">Veličković et al., 2018</div>
+          <div class="arch-desc">Introduces learnable attention coefficients αᵤᵥ, enabling the model to weight neighbor
+            contributions differentially. Multi-head attention improves stability and expressiveness.</div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-name">GraphSAGE</div>
+          <div class="arch-year">Hamilton et al., 2017</div>
+          <div class="arch-desc">Inductive learning via fixed-size neighborhood sampling. Enables generalization to
+            unseen nodes at inference time. Scalable to billion-node graphs; deployed at Pinterest (PinSage).</div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-name">GIN</div>
+          <div class="arch-year">Xu et al., 2019</div>
+          <div class="arch-desc">Theoretically proven to be maximally expressive among message-passing GNNs, equivalent
+            in discriminative power to the Weisfeiler-Lehman graph isomorphism test.</div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-name">MPNN</div>
+          <div class="arch-year">Gilmer et al., 2017</div>
+          <div class="arch-desc">Unified framework that subsumes GCN, GAT, and GraphSAGE as special instantiations of
+            the AGG and UPDATE functions. Provides the theoretical basis for all subsequent GNN variants.</div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-name">PNA</div>
+          <div class="arch-year">Corso et al., 2020</div>
+          <div class="arch-desc">Combines multiple aggregators (mean, max, min, standard deviation) with degree-scalers
+            to achieve richer and more stable neighborhood representations than single-aggregator methods.</div>
+        </div>
+      </div>
+      <p class="fig-caption">Figure 1. Taxonomy of major GNN architectures with key distinguishing properties.</p>
+    </div>
+
+    <hr>
+
+    <!-- Section 6 -->
+    <div class="section" id="sec6">
+      <span class="section-number">Section 6</span>
+      <h2>GNNs for data mining tasks</h2>
+      <p>GNNs provide a principled mechanism to reformulate each classical data mining task as a graph learning problem,
+        yielding significant performance improvements over non-relational baselines by incorporating structural
+        information into the representation learning process.</p>
+
+      <div class="task-grid">
+        <div class="task-box">
+          <div class="task-name">Node classification</div>
+          <div class="task-desc">Predict a categorical label for individual nodes using their learned embeddings and
+            local topology. GNN learns to assign labels by aggregating neighborhood context across multiple hops.</div>
+          <div class="task-eg">→ user profiling, fraud detection, paper categorization</div>
+        </div>
+        <div class="task-box">
+          <div class="task-name">Link prediction</div>
+          <div class="task-desc">Infer the existence or probability of a missing or future edge between two nodes based
+            on the similarity of their learned embedding vectors.</div>
+          <div class="task-eg">→ friend recommendations, drug-target interaction, KG completion</div>
+        </div>
+        <div class="task-box">
+          <div class="task-name">Graph classification</div>
+          <div class="task-desc">Assign a single label to an entire graph by aggregating all node embeddings into a
+            global graph-level representation via a READOUT function.</div>
+          <div class="task-eg">→ molecule toxicity, circuit classification, document categorization</div>
+        </div>
+        <div class="task-box">
+          <div class="task-name">Anomaly detection</div>
+          <div class="task-desc">Identify nodes or edges whose embeddings deviate significantly from the expected
+            distribution of their local neighborhood — without requiring explicit anomaly labels during training.</div>
+          <div class="task-eg">→ fraud detection, network intrusion, fake account detection</div>
+        </div>
+        <div class="task-box">
+          <div class="task-name">Clustering</div>
+          <div class="task-desc">Apply unsupervised clustering algorithms to GNN-derived embeddings, which serve as
+            graph-aware feature representations that encode both attribute and structural similarity.</div>
+          <div class="task-eg">→ community detection, customer segmentation, topic modeling</div>
+        </div>
+        <div class="task-box">
+          <div class="task-name">Recommendation</div>
+          <div class="task-desc">Model user-item interactions as a bipartite graph; GNNs propagate user preferences and
+            item attributes across the interaction network to predict relevance scores.</div>
+          <div class="task-eg">→ product recommendations, content discovery, rating prediction</div>
+        </div>
+      </div>
+      <p class="fig-caption">Figure 2. Mapping of classical data mining tasks to GNN-based formulations.</p>
+    </div>
+
+    <hr>
+
+    <!-- Section 7 -->
+    <div class="section" id="sec7">
+      <span class="section-number">Section 7</span>
+      <h2>Industry deployments</h2>
+      <p>GNNs have achieved widespread production deployment across high-value industry verticals, demonstrating that
+        graph-based learning delivers measurable gains over non-relational baselines at scale.</p>
+
+      <div class="industry-grid">
+        <div class="ind-box">
+          <div class="ind-sector">Healthcare</div>
+          <div class="ind-text">Drug discovery pipelines at Insilico Medicine and Schrödinger use molecular GNNs to
+            predict binding affinities. Protein interaction network modeling, including AlphaFold-derived pipelines,
+            leverages GNN-based reasoning. Medical knowledge graph completion aids clinical decision support systems.
+          </div>
+        </div>
+        <div class="ind-box">
+          <div class="ind-sector">Finance</div>
+          <div class="ind-text">PayPal's deployed GNN fraud detection system achieves a 2× reduction in false positives
+            relative to prior ML baselines. Transaction network topology is exploited for credit scoring and
+            anti-money-laundering pattern detection at major financial institutions.</div>
+        </div>
+        <div class="ind-box">
+          <div class="ind-sector">E-commerce</div>
+          <div class="ind-text">Pinterest's PinSage operates on a billion-node homogeneous graph for visual content
+            recommendation using GraphSAGE. Alibaba and Amazon deploy GNN-based systems for item recommendation and
+            review authenticity verification respectively.</div>
+        </div>
+        <div class="ind-box">
+          <div class="ind-sector">Social &amp; infrastructure</div>
+          <div class="ind-text">Facebook applies GNNs to social graph link prediction for friend recommendation at
+            scale. Google Maps uses road network GNNs for real-time ETA estimation. Twitter deploys graph-based models
+            for bot and spam detection across the full platform graph.</div>
+        </div>
+      </div>
+      <p class="fig-caption">Figure 3. Industry deployments of GNNs across major application domains.</p>
+    </div>
+
+    <hr>
+
+
+    <!-- Section 8 -->
+    <div class="section" id="sec8">
+      <span class="section-number">Section 8</span>
+      <h2>Open problems and research frontiers</h2>
+      <p>Despite their empirical success, GNNs face several fundamental challenges that constitute active areas of
+        research at the forefront of the field.</p>
+
+      <table class="challenge-table">
+        <tbody>
+          <tr>
+            <td>Scalability</td>
+            <td>Most GNN training algorithms require full-graph neighborhood expansion, which becomes computationally
+              infeasible for billion-node graphs. Mini-batch sampling introduces variance and information loss.
+              Distributed GNN training and locality-aware architectures — such as Cluster-GCN and GraphSAINT — represent
+              promising directions.</td>
+          </tr>
+          <tr>
+            <td>Over-smoothing</td>
+            <td>With increasing depth (number of layers L), node embeddings converge to indistinguishable vectors, a
+              phenomenon known as over-smoothing. The discriminative power of node representations degrades as all nodes
+              in a connected component converge to the same representation. Mitigation strategies include residual
+              connections, DropEdge regularization, and PairNorm normalization.</td>
+          </tr>
+          <tr>
+            <td>Dynamic graphs</td>
+            <td>Static GNNs cannot model temporal evolution of graph structure — addition and deletion of nodes and
+              edges over time. Temporal GNNs, including TGN, JODIE, and DyRep, extend the MPNN framework to incorporate
+              time-stamped edge sequences, but remain computationally expensive.</td>
+          </tr>
+          <tr>
+            <td>Explainability</td>
+            <td>GNN decisions are not inherently interpretable, which is a critical limitation in regulated domains such
+              as healthcare and finance where predictions must be auditable. Post-hoc explanation methods such as
+              GNNExplainer and SubgraphX identify influential subgraphs but remain limited in fidelity and computational
+              efficiency.</td>
+          </tr>
+          <tr>
+            <td>Heterogeneous graphs</td>
+            <td>Real-world graphs frequently contain multiple node and edge types with distinct semantic roles. Standard
+              GNNs treat all relations uniformly. Specialized architectures including HAN (Heterogeneous Attention
+              Network) and HGT (Heterogeneous Graph Transformer) address multi-relational modeling explicitly.</td>
+          </tr>
+          <tr>
+            <td>OOD generalization</td>
+            <td>GNNs frequently overfit to the structural distribution of the training graph and fail to generalize to
+              graphs with different topological properties — a phenomenon distinct from standard overfitting.
+              Causality-inspired learning and graph invariance approaches are being explored to address this limitation.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="fig-caption">Table 4. Open research challenges in Graph Neural Networks and current mitigation
+        approaches.</p>
+    </div>
+
+    <hr>
+
+    <!-- Section 9 -->
+    <div class="section" id="sec9">
+      <span class="section-number">Section 9</span>
+      <h2>Conclusion</h2>
+      <p>This article has presented a systematic survey of Graph Neural Networks from foundational principles to
+        state-of-the-art architectures, data mining applications, and real-world deployments. The MPNN framework
+        provides a unified theoretical basis for understanding GCN, GAT, GraphSAGE, GIN, and related models. GNNs
+        demonstrably advance performance on core data mining tasks — node classification, link prediction, graph
+        classification, anomaly detection, clustering, and recommendation — by incorporating relational structure that
+        non-graph-based methods inherently cannot represent.</p>
+
+      <p>As graph-structured data continues to proliferate across scientific and industrial domains, GNNs are poised to
+        become a foundational component of the data mining toolkit — provided that open challenges in scalability,
+        temporal modeling, and explainability are resolved by ongoing research. The convergence of graph learning with
+        causal inference, foundation models, and self-supervised learning represents particularly promising avenues for
+        future investigation.</p>
+    </div>
+
+
+
+    <div class="page-footer">
+      Graph Neural Networks for Data Mining &nbsp;·&nbsp; 2026
+    </div>
+
+  </div>
+</body>
+
+</html>
